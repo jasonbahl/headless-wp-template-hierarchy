@@ -276,7 +276,7 @@ export default function Uri() {
             <h3>So, here's the problem...</h3>
             <p>We now know the template hierarchy to fallback to, but we're not allowed to do dynamic imports in React.</p>
 
-            <p>We can't say `import('./templates/' + template)` because that's not allowed in React. (as far as I know)</p>
+            <p>We can't say <pre>import('./templates/' + template)</pre> because that's not allowed in React. (as far as I know)</p>
 
             <p>Gatsby and Express can do this because it's happening in the Node layer, not the React Layer.</p>
 
