@@ -10,7 +10,7 @@ module.exports = {
   routes: async (defineRoutes) => {
     console.log( { defineRoutes })
     return defineRoutes((route) => {
-      route("/*", "routes/index.jsx")
+      route("/*", "routes/$url.jsx")
     })
   }
 };

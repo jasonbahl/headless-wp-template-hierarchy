@@ -1,4 +1,6 @@
+const fs = require("fs")
 import { useLoaderData } from "remix";
+
 
 const SEED_QUERY = `
   query GetNodeByUri($uri:String!){
@@ -59,45 +61,29 @@ const SEED_QUERY = `
   }
 `;
 
-const getNodeByUri = async (uri) => {
-
-    console.log( { uri })
-
-    if ( uri === '' ) {
-        uri = '/'
-    }
-
-    return await fetch('https://demo.wpgraphql.com/graphql', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            query: SEED_QUERY,
-            variables: {
-                uri,
-            }
-        })
-    }).then(res=> res.json()).then(data => {
-        console.log(data)
-        return data
-    })
-}
-
-export let loader = async ( props ) => {
-    console.log("loader", props );
-    const { params } = props;
-    const uri = params['*'] ?? null;
-    const data = await getNodeByUri(uri);
-
-    
-    return { params, data }
-}
-
 const trimmedUri = (uri) => {
     if (uri.charAt(0) == "/") uri = uri.substr(1);
     if (uri.charAt(uri.length - 1) == "/") uri = uri.substr(0, uri.length - 1);
     return uri;
+}
+
+const getPageTemplates = (templates, node) => {
+
+    const typeName = node?.contentType?.node?.name ?? 'page';
+
+    templates.unshift('singular.js');
+    templates.unshift('page.js');
+    if ( node?.databaseId ) {
+        templates.unshift( `${typeName}-${node.databaseId}.js (page-databasId)` );
+    }
+    if ( node?.slug ) {
+        templates.unshift( `${typeName}-${node.slug}.js (page-slug)` );
+    }
+    if ( node?.template?.templateName) {
+        templates.unshift(`template-${node.template.templateName}.js (custom-template)`);
+    }
+
+    return templates;
 }
 
 const getTemplatesFromNode = (node, uri) => {
@@ -258,13 +244,61 @@ const getTemplatesFromNode = (node, uri) => {
 
 }
 
-export default function Uri() {
+const getNodeByUri = async (uri) => {
 
-    const { params, data } = useLoaderData();
+    console.log( { uri })
+
+    if ( uri === '' ) {
+        uri = '/'
+    }
+
+    return await fetch('https://demo.wpgraphql.com/graphql', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            query: SEED_QUERY,
+            variables: {
+                uri,
+            }
+        })
+    }).then(res=> res.json()).then(data => {
+        console.log(data)
+        return data
+    })
+}
+
+export let loader = async ( props ) => {
+    console.log("loader", props );
+    const { params } = props;
     const uri = params['*'] ?? null;
+    const data = await getNodeByUri(uri);
     const node = data?.data?.node ?? null;
     const templates = getTemplatesFromNode(node, uri);
     const uniqueTemplates = [...new Set(templates)];
+    let templatePath = require.resolve(`../wordpress/templates/index.js`);
+    console.log( templatePath)
+    console.log( { uniqueTemplates, templateFile } );
+
+    // uniqueTemplates.map(template => {
+    //     try {
+    //         if (fs.existsSync(templatePath)) {
+    //             TemplateFile = require.resolve(templatePath)
+    //         }
+    //       } catch (err) {
+    //         console.error(err)
+    //       }
+    // })
+    
+    return { params, data, uri, node, uniqueTemplates, templateFile };
+}
+
+export default function Uri() {
+
+    const loaderData = useLoaderData();
+    console.log( loaderData );
+    const { data, params, uniqueTemplates } = loaderData;
 
     return (
         <div>
