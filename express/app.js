@@ -71,7 +71,7 @@ const getNodeByUri = async (uri) => {
         uri = '/'
     }
 
-    return await fetch('http://bookstore.local/graphql', {
+    return await fetch('https://demo.wpgraphql.com/graphql', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
