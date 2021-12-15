@@ -286,6 +286,17 @@ export default function Uri() {
             <p>We can have a predictable fallback pattern, where a default template will be used if it exists,
             but more specific templates will be used if they exist.</p>
 
+            <p>Also, if no  WordPress node is found, I want to be able to fall-back to other Remix routing conventions, and I'm not sure how to do that?</p>
+
+            <p>Like, in my mind it would be nice to be able to do something like:</p>
+
+            <ul>
+                <li>If there's a file route, use it</li>
+                <li>If not, query a node from WordPress</li>
+                <li>If there's a WordPress node, determine the template to use using the template hierarchy logic</li>
+                <li>If there's no WordPress node, fallback to other remix defaults, like 404, or whatever (maybe some convetion to let other data sources check for nodes?)</li>
+            </ul>
+
             <h2>Node By Uri</h2>
             <pre>{JSON.stringify(data,null,2)}</pre>
         </div>
