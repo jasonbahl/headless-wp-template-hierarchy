@@ -1,14 +1,3 @@
-# Next.js Headless WordPress Getting Started Example
+# FaustJS
 
-## Setup
-
-See the [setup steps](https://github.com/wpengine/faustjs#quick-start).
-
-## Run it
-
-```bash
-npm install
-npm run dev
-```
-
-[http://localhost:3000]()
+NOTE: I wasn't able to get this to a working state yet. use at your own risk.
