@@ -5,6 +5,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 /** @type {import('next').NextConfig} */
 const nextConfig = withBundleAnalyzer({
   swcMinify: true,
+  experimental: { 
+    runtime: "nodejs" 
+  },
   // had to set this to false in order to get @headless-ui components to work.
   // @see: https://github.com/tailwindlabs/headlessui/issues/681#issuecomment-1086162507
   reactStrictMode: false, 
