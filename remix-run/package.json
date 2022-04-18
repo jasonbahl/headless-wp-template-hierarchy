@@ -13,6 +13,9 @@
     "start": "remix-serve build",
     "dev:css": "tailwindcss -w -i ./styles/app.css -o app/styles/app.css"
   },
+  "browserslist": [
+    "> 1%"
+  ],
   "dependencies": {
     "@apollo/client": "^3.5.10",
     "@headlessui/react": "^1.5.0",
@@ -39,8 +42,5 @@
     "eslint": "^8.11.0",
     "postcss": "^8.4.12",
     "tailwindcss": "^3.0.24"
-  },
-  "engines": {
-    "node": ">=14"
   }
 }
