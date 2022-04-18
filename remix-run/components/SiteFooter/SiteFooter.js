@@ -1,3 +1,5 @@
+import { Link } from '@remix-run/react'
+
 /* This example requires Tailwind CSS v2.0+ */
 const navigation = [
   {
