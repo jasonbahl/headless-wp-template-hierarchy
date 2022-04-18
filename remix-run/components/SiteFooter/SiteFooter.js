@@ -43,14 +43,14 @@ export default function Example() {
       <div className="max-w-7xl mx-auto pt-10 pb-28 border-t border-slate-200 sm:flex justify-between text-slate-500 dark:border-slate-200/5">
         <div className="flex justify-center space-x-6 md:order-2">
           {navigation.map((item) => (
-            <a
+            <Link
               key={item.name}
-              href={item.href}
+              to={item.href}
               className="text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-100"
             >
               <span className="sr-only">{item.name}</span>
               <item.icon className="h-6 w-6" aria-hidden="true" />
-            </a>
+            </Link>
           ))}
         </div>
         <div className="mt-8 md:mt-0 md:order-1 prose dark:prose-invert">

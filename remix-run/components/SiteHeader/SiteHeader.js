@@ -34,24 +34,6 @@ const docs = [
     icon: 'ShieldCheckIcon',
   },
 ]
-const resources = [
-  {
-    name: 'Help Center',
-    description: 'Get all of your questions answered in our forums or contact support.',
-    href: '#',
-  },
-  {
-    name: 'Guides',
-    description: 'Learn how to maximize our platform to get the most out of it.',
-    href: '#',
-  },
-  {
-    name: 'Events',
-    description: 'See what meet-ups and other events we might be planning near you.',
-    href: '#',
-  },
-  { name: 'Security', description: 'Understand how we take your privacy seriously.', href: '#' },
-]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -81,12 +63,10 @@ const SiteHeader = () => {
       <div className="max-w-8xl mx-auto flex justify-between items-center px-4 py-4 sm:px-6 md:justify-start md:space-x-10">
         <div className="flex justify-start lg:w-0 lg:flex-1">
           <Link to="/">
-            <a>
-              <span className="sr-only">WPGraphQL</span>
-              <div className="h-8 w-auto sm:h-10">
-                <SiteLogo />
-              </div>
-            </a>
+            <span className="sr-only">WPGraphQL</span>
+            <div className="h-8 w-auto sm:h-10">
+              <SiteLogo />
+            </div>
           </Link>
         </div>
         <div className="-mr-2 -my-2 md:hidden">
@@ -128,9 +108,9 @@ const SiteHeader = () => {
                     <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                       <div className="relative grid gap-6 bg-white dark:bg-slate-700 px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2">
                         {docs.map((solution) => (
-                          <a
+                          <Link
                             key={solution.name}
-                            href={solution.href}
+                            to={solution.href}
                             className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-100 dark:hover:bg-slate-600"
                           >
                             <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white sm:h-12 sm:w-12">
@@ -148,12 +128,12 @@ const SiteHeader = () => {
                                 {solution.description}
                               </p>
                             </div>
-                          </a>
+                          </Link>
                         ))}
                       </div>
                       <div className="p-5 bg-gray-100 sm:p-8 dark:bg-slate-800">
-                        <a
-                          href="#"
+                        <Link
+                          to="/docs/contributing/"
                           className="-m-3 p-3 flow-root rounded-md hover:bg-gray-200 dark:hover:bg-gray-700"
                         >
                           <div className="flex items-center">
@@ -164,7 +144,7 @@ const SiteHeader = () => {
                           <p className="mt-1 text-sm text-gray-500 dark:text-gray-200">
                             Help make WPGraphQL better for everyone.
                           </p>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </Popover.Panel>
@@ -172,20 +152,14 @@ const SiteHeader = () => {
               </>
             )}
           </Popover>
-          <Link to="/developer-reference">
-            <a className="text-base font-medium text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-gray-300">
-              Developer Reference
-            </a>
+          <Link to="/developer-reference" className="text-base font-medium text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-gray-300">
+            Developer Reference
           </Link>
-          <Link to="/extensions">
-            <a className="text-base font-medium text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-gray-300">
-              Extensions
-            </a>
+          <Link to="/extensions" className="text-base font-medium text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-gray-300">
+            Extensions
           </Link>
-          <Link to="/blog">
-            <a className="text-base font-medium text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-gray-300">
-              Blog
-            </a>
+          <Link to="/blog" className="text-base font-medium text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-gray-300">
+            Blog
           </Link>
         </Popover.Group>
         <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
@@ -211,9 +185,7 @@ const SiteHeader = () => {
               <div className="flex items-center justify-between">
                 <div className="h-8 w-auto">
                   <Link to="/">
-                    <a>
-                      <SiteLogo />
-                    </a>
+                    <SiteLogo />
                   </Link>
                 </div>
                 <div className="-mr-2">

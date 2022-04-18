@@ -1,3 +1,5 @@
+import { Link } from '@remix-run/react'
+
 const HomepageHero = () => {
   return (
     <div className="bg-white dark:bg-slate-800">
@@ -12,14 +14,14 @@ const HomepageHero = () => {
                 WPGraphQL is a free, open-source WordPress plugin that provides an extendable
                 GraphQL schema and API for any WordPress site.
               </p>
-              <a
-                href="#"
+              <Link
+                to="/docs/introduction/"
                 className="mt-8 bg-white dark:bg-slate-800 border border-transparent rounded-md shadow px-5 py-3 inline-flex items-center text-base font-medium text-sky-800 dark:text-sky-50 hover:bg-gray-100 dark:hover:bg-slate-900 hover:shadow-lg"
               >
                 Get Started
-              </a>
+              </Link>
               <a
-                href="#"
+                href="https://wordpress.org/plugins/wp-graphql/"
                 className="mt-8 ml-8 bg-orange-500  border border-transparent rounded-md shadow px-5 py-3 inline-flex items-center text-base font-medium text-white hover:bg-orange-600 hover:shadow-lg"
               >
                 Download the Plugin
