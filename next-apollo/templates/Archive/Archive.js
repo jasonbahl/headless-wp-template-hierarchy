@@ -41,11 +41,13 @@ Archive.query = gql`
 `
 
 Archive.loading = () => {
-  ;<h2>Loading...</h2>
+  <h2>Loading...</h2>
 }
+
 Archive.error = () => {
-  ;<h2>Error...</h2>
+  <h2>Error...</h2>
 }
+
 Archive.component = ({ data: { archive } }) => (
   <>
     <SiteLayout>

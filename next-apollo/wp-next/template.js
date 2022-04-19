@@ -331,7 +331,6 @@ export const getTemplateForSeedNode = (seedNode) => {
 }
 
 export const wordPressServerSideProps = async (context) => {
-  // return await wordPressServerSideProps(context)
   const { params, resolvedUrl } = context
   const apolloClient = initializeApollo()
   const root = await apolloClient.query({ query: SEED_QUERY, variables: { uri: resolvedUrl } })
