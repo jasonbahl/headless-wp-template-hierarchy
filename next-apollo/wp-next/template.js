@@ -331,7 +331,20 @@ export const getTemplateForSeedNode = (seedNode) => {
 }
 
 export const wordPressServerSideProps = async (context) => {
-  const { params, resolvedUrl } = context
+
+  let resolvedUrl;
+  let params;
+
+  // if there's no resolvedUrl in the context, 
+  // then we're using SSG instead of SSR
+  if ( ! context?.resolvedUrl ) {
+    params = context?.params ?? null;
+    resolvedUrl = params?.WordPressNode ? params.WordPressNode.join('/') : null;
+  } else {
+    params = context?.params ?? null;
+    resolvedUrl = context?.resolvedUrl ?? null;
+  }
+  
   const apolloClient = initializeApollo()
   const root = await apolloClient.query({ query: SEED_QUERY, variables: { uri: resolvedUrl } })
   
@@ -364,6 +377,11 @@ export const wordPressServerSideProps = async (context) => {
 export const WordPressNode = props => {
   const { rootNode, pageData } = props
   const template = getTemplateForSeedNode(rootNode)
+
+  if ( ! template || ! template.query || ! template.variables ) {
+    return <h2>Error...</h2>
+  }
+
   const { query, variables } = template
   let Component = template.component ?? <h2>Fallback Template...</h2>
   
