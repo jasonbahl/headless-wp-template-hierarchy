@@ -1,4 +1,4 @@
-import SiteHeader from '../SiteHeader/SiteHeader'
+import SiteHeader, { NAV_QUERY } from '../SiteHeader/SiteHeader'
 
 const SiteLayout = ({ children }) => {
   return (
@@ -8,5 +8,7 @@ const SiteLayout = ({ children }) => {
     </>
   )
 }
+
+export { NAV_QUERY }
 
 export default SiteLayout

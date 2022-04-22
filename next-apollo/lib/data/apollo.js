@@ -1,9 +1,8 @@
 import { useMemo } from 'react'
-import { ApolloClient, InMemoryCache } from '@apollo/client'
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import merge from 'deepmerge'
 import isEqual from 'lodash/isEqual'
 import possibleTypes from '/possibleTypes.json'
-import { BatchHttpLink } from '@apollo/client/link/batch-http'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 const windowApolloState = typeof window !== 'undefined' ? window[APOLLO_STATE_PROP_NAME] : {}
@@ -16,10 +15,11 @@ function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     connectToDevTools: typeof window !== 'undefined',
-    link: new BatchHttpLink({
+    link: new HttpLink({
       uri,
-      batchMax: 10,
-      batchInterval: 20,
+      fetchOptions: {
+        method: 'GET'
+      }
     }),
     cache: new InMemoryCache({
       possibleTypes,

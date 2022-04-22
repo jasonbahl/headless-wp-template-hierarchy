@@ -70,7 +70,7 @@ const PostPreview = ({ post }) => {
             </div>
           </div>
           <div
-            className="prose dark:prose-dark max-w-none text-gray-500 dark:text-gray-400"
+            className="prose dark:prose-dark max-w-none "
             dangerouslySetInnerHTML={{ __html: excerpt }}
           />
         </div>

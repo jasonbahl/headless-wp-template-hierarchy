@@ -5,6 +5,8 @@ import Author from 'templates/Author/Author';
 import Category from 'templates/Category/Category';
 import Archive from 'templates/Archive/Archive';
 import Index from 'templates/Index/Index';
+import SingleRecipe from 'templates/SingleRecipe/SingleRecipe';
+import { NAV_QUERY } from 'components/SiteHeader/SiteHeader';
 
 export const SEED_QUERY = gql`
 query GetNodeByUri($uri: String!) {
@@ -137,6 +139,10 @@ const TEMPLATES = {
       )
     },
   },
+  'single-code-snippets': SingleRecipe,
+  'single-actions': SingleRecipe,
+  'single-filters': SingleRecipe,
+  'single-functions': SingleRecipe,
   'tag-43': {
     name: 'tag43',
     query: gql`
@@ -260,10 +266,18 @@ export const getTemplateForSeedNode = (seedNode) => {
     }
   }
 
+  
   if (true === seedNode?.isContentNode) {
     const typeName = seedNode.contentType?.node?.name ?? 'page'
     template = getTemplate('singular') ?? template
+    // console.log( { typeName })
     switch (typeName) {
+      //@todo: fix this
+      case 'code-snippets':
+        // console.log( { TEMPLATES })
+        template = getTemplate('single-code-snippets') ?? 'goo'
+        // console.log( { template })
+        break;
       case 'page':
         template = getPageTemplate(seedNode) ?? template
         break
@@ -332,17 +346,24 @@ export const getTemplateForSeedNode = (seedNode) => {
 
 export const wordPressServerSideProps = async (context) => {
 
-  let resolvedUrl;
-  let params;
+  let resolvedUrl = null;
+  let params = null;
 
   // if there's no resolvedUrl in the context, 
   // then we're using SSG instead of SSR
-  if ( ! context?.resolvedUrl ) {
-    params = context?.params ?? null;
-    resolvedUrl = params?.WordPressNode ? params.WordPressNode.join('/') : null;
-  } else {
+  if ( context.resolvedUrl ) {
     params = context?.params ?? null;
     resolvedUrl = context?.resolvedUrl ?? null;
+    
+  } else if ( context?.params?.WordPressNode ) {
+    params = context?.params ?? null;
+    resolvedUrl = context?.params?.WordPressNode ? context?.params?.WordPressNode.join('/') : null;
+  }
+
+  if ( !resolvedUrl ) {
+    return {
+      notFound: true,
+    }
   }
   
   const apolloClient = initializeApollo()
@@ -359,17 +380,21 @@ export const wordPressServerSideProps = async (context) => {
   const template = getTemplateForSeedNode(rootNode)
   const { query, variables } = template
 
-  const { data } = await apolloClient.query({
+  await apolloClient.query({
     query,
     variables,
+  })
+  
+  await apolloClient.query({
+    query: NAV_QUERY,
+    variables: { menu_name: 'Primary Nav' },
   })
   
   return addApolloState(apolloClient, {
       props: {
         uri: resolvedUrl,
         rootNode,
-        params,
-        pageData: data
+        params
       },
   })
 }
@@ -385,19 +410,19 @@ export const WordPressNode = props => {
   const { query, variables } = template
   let Component = template.component ?? <h2>Fallback Template...</h2>
   
-  const { data, error, loading, called } = useQuery(query, {
+  const { data, error, loading, called, client } = useQuery(query, {
     variables,
     ssr: true,
   })
 
-  console.log( { 
-    useQuery: {
-      data,
-      error,
-      loading,
-      called,
-    }
-  })
+  // console.log( { 
+  //   useQuery: {
+  //     data,
+  //     error,
+  //     loading,
+  //     called,
+  //   }
+  // })
 
   return (
     <>

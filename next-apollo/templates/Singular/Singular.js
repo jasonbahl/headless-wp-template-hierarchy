@@ -73,7 +73,7 @@ Singular.component = (props) => {
                   </dd>
                 </dl>
                 <div className="space-y-6">
-                  <h1 className="col-span-full break-words text-3xl sm:text-4xl text-center xl:mb-16 font-extrabold tracking-tight text-slate-900 dark:text-slate-200">
+                  <h1 className="col-span-full break-words text-3xl sm:text-4xl text-center xl:mb-5 font-extrabold tracking-tight text-slate-900 dark:text-slate-200">
                     {post.title}
                   </h1>
                   <div className="flex flex-wrap justify-center">
@@ -87,7 +87,7 @@ Singular.component = (props) => {
                   </div>
                 </div>
 
-                <div className="flex justify-center mb-8">
+                <div className="flex justify-center my-8">
                   <dl>
                     <div className="sm:flex sm:flex-wrap justify-center xl:block">
                       <dt className="sr-only">Author</dt>
@@ -111,16 +111,12 @@ Singular.component = (props) => {
                   </dl>
                 </div>
               </header>
-              <div className="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
-                <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8">
-                  <div className="lg:col-span-2">
-                    <div
-                      id="content"
-                      className="prose dark:prose-dark"
-                      dangerouslySetInnerHTML={{ __html: post.content }}
-                    />
-                  </div>
-                </div>
+              <div className="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-12">
+                  <div
+                    id="content"
+                    className="prose dark:prose-dark"
+                    dangerouslySetInnerHTML={{ __html: post.content }}
+                  />
               </div>
             </article>
           </main>
