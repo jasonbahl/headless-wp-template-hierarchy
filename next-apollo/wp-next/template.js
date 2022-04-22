@@ -274,6 +274,9 @@ export const getTemplateForSeedNode = (seedNode) => {
     switch (typeName) {
       //@todo: fix this
       case 'code-snippets':
+      case 'single-actions':
+      case 'single-functions':
+      case 'single-filters':
         // console.log( { TEMPLATES })
         template = getTemplate('single-code-snippets') ?? 'goo'
         // console.log( { template })
