@@ -1,4 +1,3 @@
-import { gql } from '@apollo/client'
 import { wordPressServerSideProps, WordPressNode } from 'wp-next'
 
 const WordPressNodeTemplate = props => {

@@ -441,15 +441,6 @@ export const WordPressNode = props => {
     ssr: true,
   })
 
-  // console.log( { 
-  //   useQuery: {
-  //     data,
-  //     error,
-  //     loading,
-  //     called,
-  //   }
-  // })
-
   return (
     <>
       <Component error={error} loading={loading} data={data ?? pageData } {...props} />
