@@ -402,7 +402,6 @@ export const wordPressServerSideProps = async (context) => {
     variables: { menu_name: 'Primary Nav' },
   })
 
-  
   let props = {
     uri: resolvedUrl,
     rootNode,
@@ -416,14 +415,12 @@ export const wordPressServerSideProps = async (context) => {
   // if we're using SSG, we need to determine the revalidate timer
   if ( isStatic ) {
     response = {
-      ...response,
+      props,
       revalidate: 30 
     }
   }
   
-  return addApolloState(apolloClient, {
-    response,
-  })
+  return addApolloState(apolloClient, response)
 }
 
 export const WordPressNode = props => {
