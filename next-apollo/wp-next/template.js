@@ -78,6 +78,12 @@ const TEMPLATES = {
     `,
     component: () => <h1>SINGLE...</h1>,
   },
+  'singular-832361': {
+    name: 'singular-832361',
+    query: Singular.query,
+    variables: Singular.variables,
+    component: Singular.component,
+  },
   singular: Singular,
   page: {
     name: 'page',
@@ -287,6 +293,7 @@ export const getTemplateForSeedNode = (seedNode) => {
       case 'post':
         break
     }
+    template = getTemplate(`${typeName}-${seedNode.databaseId}`) ?? template
   }
 
   if (true === seedNode?.isTermNode) {
@@ -351,6 +358,7 @@ export const wordPressServerSideProps = async (context) => {
 
   let resolvedUrl = null;
   let params = null;
+  let isStatic = false;
 
   // if there's no resolvedUrl in the context, 
   // then we're using SSG instead of SSR
@@ -360,6 +368,7 @@ export const wordPressServerSideProps = async (context) => {
     
   } else if ( context?.params?.WordPressNode ) {
     params = context?.params ?? null;
+    isStatic = true;
     resolvedUrl = context?.params?.WordPressNode ? context?.params?.WordPressNode.join('/') : null;
   }
 
@@ -392,23 +401,37 @@ export const wordPressServerSideProps = async (context) => {
     query: NAV_QUERY,
     variables: { menu_name: 'Primary Nav' },
   })
+
+  let props = {
+    uri: resolvedUrl,
+    rootNode,
+    params
+  }
+
+  // if we're using SSG, we need to determine the revalidate timer
+  if ( isStatic ) {
+    props = {...props, revalidate: 30 }
+  }
   
   return addApolloState(apolloClient, {
-      props: {
-        uri: resolvedUrl,
-        rootNode,
-        params
-      },
+      props,
   })
 }
 
 export const WordPressNode = props => {
-  const { rootNode, pageData } = props
-  const template = getTemplateForSeedNode(rootNode)
+  const { rootNode, pageData, templates = {} } = props
+  console.log( { props } )
+  let template = getTemplateForSeedNode(rootNode)
+  console.log( { template, props, templates } )
 
   if ( ! template || ! template.query || ! template.variables ) {
     return <h2>Error...</h2>
   }
+
+  if ( templates[template.name] ) {
+    template = { ...template, ...templates[template.name] }
+  }
+  console.log( { template })
 
   const { query, variables } = template
   let Component = template.component ?? <h2>Fallback Template...</h2>

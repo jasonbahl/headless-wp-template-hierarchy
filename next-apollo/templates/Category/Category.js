@@ -34,7 +34,6 @@ Category.error = () => {
 }
 
 Category.component = (props) => {
-  console.log({ cat: { props } })
   const { data } = props
 
   if (!data) {

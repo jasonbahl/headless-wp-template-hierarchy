@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const Singular = {
-  name: 'Singular',
+  name: 'singular',
 }
 
 Singular.variables = ({ uri }) => {
