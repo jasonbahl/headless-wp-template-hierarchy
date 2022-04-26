@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client'
 import SiteLayout from 'components/SiteLayout/SiteLayout'
 import SiteFooter from 'components/SiteFooter/SiteFooter'
+import { NAV_QUERY } from 'components/SiteHeader/SiteHeader'
 import PostPreview, { PostPreviewFragment } from 'components/PostPreview/PostPreview'
 import { initializeApollo, addApolloState } from 'lib/data/apollo'
 
