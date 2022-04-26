@@ -23,7 +23,7 @@ function createApolloClient() {
     }),
     defaultOptions: {
       query: {
-        fetchPolicy: 'no-cache',
+        fetchPolicy: 'cache-first',
       }
     },
     cache: new InMemoryCache({
