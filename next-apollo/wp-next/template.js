@@ -402,19 +402,27 @@ export const wordPressServerSideProps = async (context) => {
     variables: { menu_name: 'Primary Nav' },
   })
 
+  
   let props = {
     uri: resolvedUrl,
     rootNode,
     params
   }
 
+  let response = {
+    props
+  }
+
   // if we're using SSG, we need to determine the revalidate timer
   if ( isStatic ) {
-    props = {...props, revalidate: 30 }
+    response = {
+      ...response,
+      revalidate: 30 
+    }
   }
   
   return addApolloState(apolloClient, {
-      props,
+    response,
   })
 }
 
