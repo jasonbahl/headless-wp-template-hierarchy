@@ -21,6 +21,11 @@ function createApolloClient() {
         method: 'GET'
       }
     }),
+    defaultOptions:{
+      query: {
+        fetchPolicy: 'cache-and-network',
+      }
+    },
     cache: new InMemoryCache({
       possibleTypes,
       typePolicies: {

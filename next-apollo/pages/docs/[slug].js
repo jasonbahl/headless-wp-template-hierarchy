@@ -43,6 +43,7 @@ export const getStaticProps = async ({ params }) => {
       data: getDocData(params.slug),
       source,
       frontmatter: source.frontmatter,
+      revalidate: 30
     },
   }
 }
