@@ -70,9 +70,15 @@ export async function getServerSideProps(context) {
     },
   })
 
+  await apolloClient.query({
+    query: NAV_QUERY,
+    variables: { menu_name: 'Primary Nav' },
+  })
+
   return addApolloState(apolloClient, {
     props: {
       uri: resolvedUrl,
     },
+    revalidate: '30',
   })
 }
