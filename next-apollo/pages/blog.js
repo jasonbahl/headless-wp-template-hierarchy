@@ -80,10 +80,3 @@ export async function getStaticProps() {
     revalidate: '30'
   })
 }
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: false,
-  }
-}
