@@ -60,7 +60,7 @@ const Blog = () => {
 
 export default Blog
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const { resolvedUrl } = context
   const apolloClient = initializeApollo()
 
@@ -80,6 +80,13 @@ export async function getServerSideProps(context) {
     props: {
       uri: resolvedUrl,
     },
-    revalidate: '30',
+    revalidate: '30'
   })
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: false,
+  }
 }
