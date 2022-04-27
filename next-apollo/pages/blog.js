@@ -60,8 +60,7 @@ const Blog = () => {
 
 export default Blog
 
-export async function getStaticProps(context) {
-  const { resolvedUrl } = context
+export async function getStaticProps() {
   const apolloClient = initializeApollo()
 
   await apolloClient.query({
@@ -77,9 +76,7 @@ export async function getStaticProps(context) {
   })
 
   return addApolloState(apolloClient, {
-    props: {
-      uri: resolvedUrl,
-    },
+    props: {},
     revalidate: '30'
   })
 }
