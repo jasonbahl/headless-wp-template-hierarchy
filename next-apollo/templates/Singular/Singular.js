@@ -59,6 +59,7 @@ Singular.component = (props) => {
       })
     : null
 
+
   return (
     <SiteLayout>
       <div className="overflow-hidden">

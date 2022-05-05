@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+import PostPreviewCategoryLink, { PostPreviewCategoryLinkFragment } from 'components/PostPreviewCategoryLink/PostPreviewCategoryLink'
 import Link from 'next/link'
 
 export const PostPreviewFragment = gql`
@@ -8,9 +9,7 @@ export const PostPreviewFragment = gql`
     uri
     categories {
       nodes {
-        id
-        name
-        uri
+        ...PostPreviewCategoryLink
       }
     }
     excerpt: content
@@ -26,6 +25,7 @@ export const PostPreviewFragment = gql`
       }
     }
   }
+  ${PostPreviewCategoryLinkFragment}
 `
 
 const PostPreview = ({ post }) => {
@@ -61,11 +61,7 @@ const PostPreview = ({ post }) => {
             </h2>
             <div className="flex flex-wrap">
               {post?.categories?.nodes?.map((category, i) => (
-                <Link key={i} href={category.uri}>
-                  <a className="mr-3 text-sm font-medium uppercase text-sky-500 dark:text-sky-300 hover:text-primary-600 dark:hover:text-sky-400">
-                    {category.name}
-                  </a>
-                </Link>
+                <PostPreviewCategoryLink key={i} category={category} />
               ))}
             </div>
           </div>

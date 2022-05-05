@@ -1,9 +1,11 @@
-import { gql } from '@apollo/client'
 import { wordPressServerSideProps, WordPressNode } from 'wp-next'
-
+// import { gql } from '@apollo/client'
+//
+// Uncomment to override templates
+//
 // const templates = {
 //     'singular': {
-//         query: gql`{__typename}`,
+//         query: gql`{ __typename }`,
 //         component: props => {
 //             return (
 //                 <>
@@ -15,24 +17,23 @@ import { wordPressServerSideProps, WordPressNode } from 'wp-next'
 //     }
 // }
 
-
 const WordPressNodeTemplate = props => {
     return <WordPressNode templates={{}} {...props} />
 }
 
 export default WordPressNodeTemplate
 
-// export async function getServerSideProps(context) {
-//  return await wordPressServerSideProps(context)
+export async function getServerSideProps(context) {
+ return await wordPressServerSideProps(context)
+}
+
+// export async function getStaticProps(context) {
+//     return await wordPressServerSideProps(context)
 // }
 
-export async function getStaticProps(context) {
-    return await wordPressServerSideProps(context)
-}
-
-export async function getStaticPaths() {
-    return {
-        paths: [],
-        fallback: 'blocking'
-    }
-}
+// export async function getStaticPaths() {
+//     return {
+//         paths: [],
+//         fallback: 'blocking'
+//     }
+// }
