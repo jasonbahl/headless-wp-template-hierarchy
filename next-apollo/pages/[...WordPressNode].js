@@ -23,17 +23,17 @@ const WordPressNodeTemplate = props => {
 
 export default WordPressNodeTemplate
 
-// export async function getServerSideProps(context) {
-//  return await wordPressServerSideProps(context)
+export async function getServerSideProps(context) {
+ return await wordPressServerSideProps(context)
+}
+
+// export async function getStaticProps(context) {
+//     return await wordPressServerSideProps(context)
 // }
 
-export async function getStaticProps(context) {
-    return await wordPressServerSideProps(context)
-}
-
-export async function getStaticPaths() {
-    return {
-        paths: [],
-        fallback: 'blocking'
-    }
-}
+// export async function getStaticPaths() {
+//     return {
+//         paths: [],
+//         fallback: 'blocking'
+//     }
+// }
