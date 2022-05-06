@@ -18,7 +18,7 @@ function createApolloClient() {
     link: new HttpLink({
       uri,
       fetchOptions: {
-        method: 'GET'
+        method: 'POST'
       }
     }),
     cache: new InMemoryCache({
