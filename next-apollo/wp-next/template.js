@@ -443,7 +443,7 @@ export const WordPressNode = props => {
   
   const { data, error, loading, called, client } = useQuery(query, {
     variables,
-    ssr: true,
+    ssr: true
   })
 
   return (
