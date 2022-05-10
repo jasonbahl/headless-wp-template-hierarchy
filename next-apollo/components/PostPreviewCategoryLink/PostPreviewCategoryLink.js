@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client"
-import { Link } from "react-scroll"
+import Link from "next/link"
 
 export const PostPreviewCategoryLinkFragment = gql`
 fragment PostPreviewCategoryLink on Category {
