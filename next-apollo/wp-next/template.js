@@ -416,7 +416,7 @@ export const wordPressServerSideProps = async (context) => {
   if ( isStatic ) {
     response = {
       props,
-      revalidate: 30 
+      revalidate: 5 
     }
   }
   
